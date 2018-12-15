@@ -14,6 +14,7 @@ def test2():
 
     @app.route('/',methods=['GET','POST'])
     def home():
+        print(request.headers,'\ndata:********',request.data)
         return render_template('home.html')
     @app.route('/signin',methods=['GET'])
     def signin_form():
@@ -26,7 +27,7 @@ def test2():
             return render_template('signin-ok.html',username=username)
         return render_template('form.html',message='Bad username or password',username=username)
     if __name__=="__main__":
-        app.run(host='207.148.94.195',port=80)
+        app.run(host='127.0.0.1',port=80)
 
 
 if __name__=='__main__':

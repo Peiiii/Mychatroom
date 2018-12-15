@@ -3,9 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <title>home</title>
+    <style>
+        textview{
+            display:block;
+         }
+         body{
+            background:black;
+            color:orange;
+         }
+    </style>
+    <script type="text/javascript" src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.dev.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function (){
+            me='Me      : ';
+            you='There: ';
+            pre='<div style="color:green">';
+            suf='</div>'
+            addr='http://'+document.domain+':'+'80'
+            var socket=io.connect(addr);
+            socket.on('connect',function (){
+                text=pre+'Connected ...'+suf;
+                $('#message_show')[0].insertAdjacentHTML('beforeend',text);
+            });
+            socket.on('say_hi',function(msg){
+                console.log(msg)
+                ircv=msg.data
+                text=pre+you+ircv+suf;
+                $('#message_show')[0].insertAdjacentHTML('beforeend',text);
+
+                isend="Hello, I'm Mary!";
+                socket.emit('say_hi',{data:isend});
+                text=pre+me+isend+suf;
+                $('#message_show')[0].insertAdjacentHTML('beforeend',text);
+            });
+            socket.on('message',function(msg){
+                console.log(msg)
+                ircv=msg.data
+                text=pre+you+ircv+suf;
+                $('#message_show')[0].insertAdjacentHTML('beforeend',text);
+                //socket.send({data:'Mary'});
+            });
+
+            $('.msg-send')[0].onclick=function(){
+                isend=$('#emit_data')[0].value;
+                socket.send({data:isend});
+                text=pre+me+isend+suf;
+                $('#message_show')[0].insertAdjacentHTML('beforeend',text);
+                $('#emit_data').val('');
+            };
+
+            $('#emit_data').bind('keypress',function(event){
+                if(event.keyCode===13){
+                    event.preventDefault();
+                    $('.msg-send').click();
+                };
+            });
+        });
+    </script>
 </head>
 <body>
-<h1 style="color:green">Home!</h1>
-<a href="/signin"><button>sign in</button></a>
+<h1 style="color:green">Danger!</h1>
+<br><br>
+<div id="message_show">
+
+</div><br><br>
+<input type="text" id="emit_data" placeholder="Input..." autocomplete="off">
+<a href="#!" class="button-link msg-send">Echo</a>
+
+<iframe name="the_frame" style="display:none;"></iframe>
+<p>Nothing!</p>
 </body>
 </html>
