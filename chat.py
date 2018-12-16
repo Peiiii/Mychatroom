@@ -40,14 +40,9 @@ def handle_say_hi(msg):
 def log(event):
     print('-->>>{}:  '.format(event),end='')
 if __name__=="__main__":
-<<<<<<< HEAD
     addr=('0.0.0.0',80)
     print('http://127.0.0.1:80...')
     #print('Serve on http://{}:{}'.format(addr[0],addr[1]))
-=======
-    addr=('0.0.0.0',5000)
-    print('Serve on http://{}:{}'.format(addr[0],addr[1]))
->>>>>>> 1f2ce86cd2ce04c19e78c76b3a7ad4fdc8f8566c
     socketio.run(app,host=addr[0],port=addr[1])
 
 
