@@ -8,8 +8,10 @@
             display:block;
          }
          body{
+            font-size:50px;
             background:black;
             color:orange;
+            width:100%;
          }
     </style>
     <script type="text/javascript" src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
@@ -61,17 +63,41 @@
             });
         });
     </script>
+    <script>
+        $(document).ready(function(){
+            a=navigator.userAgent;
+            if(!a.match(/(Android|iOS)/i)){
+                console.log('Not mobile!');
+                $('body').css('font-size','20px');
+            }
+            else{
+
+                $('body').css('font-size','40px');
+                mobi=$('#emit_data');
+                mobi.css({'font-size':'100%'});
+                a=$('.button-link');
+                a.css({'font-size':'100%'});
+
+            }
+        });
+    </script>
 </head>
 <body>
+<div style="margin-left:auto;margin-right:auto;">
+    <div style="margin-left:auto;margin-right:auto;width:20em;">
+        <ul><li>
+            <a href="http://207.148.94.195">My site...</a></li>
+            <li><a href="https://github.com/Peiiii">My github...</a></li></ul>
+
 <h1 style="color:green">Danger!</h1>
 <br><br>
 <div id="message_show">
 
 </div><br><br>
-<input type="text" id="emit_data" placeholder="Input..." autocomplete="off">
-<a href="#!" class="button-link msg-send">Echo</a>
+<input type="text" id="emit_data" placeholder="Input..." autocomplete="off" >
+<button href="#!" class="button-link msg-send">Echo</button>
 
 <iframe name="the_frame" style="display:none;"></iframe>
-<p>Nothing!</p>
+        <p>Nothing!</p></div></div>
 </body>
 </html>
