@@ -4,6 +4,9 @@ from flask_socketio import SocketIO,emit
 app=Flask(__name__)
 app.config['SECRET_KEY']='secret!'
 socketio=  SocketIO(app)
+ip='0.0.0.0'
+port=8001
+url='localhost:8001'
 
 @app.route('/',methods=['GET','POST'])
 def home():
@@ -40,8 +43,8 @@ def handle_say_hi(msg):
 def log(event):
     print('-->>>{}:  '.format(event),end='')
 if __name__=="__main__":
-    addr=('0.0.0.0',80)
-    print('http://127.0.0.1:80...')
+    addr=(ip,port)
+    print('http://%s...'%(url))
     #print('Serve on http://{}:{}'.format(addr[0],addr[1]))
     socketio.run(app,host=addr[0],port=addr[1])
 
